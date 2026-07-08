@@ -28,8 +28,14 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/menus">Menus</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">À propos</a>
+                            <li class="nav-item" data-show="connected"> <!-- à afficher lorsque l'utilisateur est connecté (client ou employé ou admin)-->
+                                <a class="nav-link" href="/account">Mon compte</a>
+                            </li>
+                            <li class="nav-item" data-show="disconnected">
+                                <a class="nav-link" href="/signin">Connexion</a>
+                            </li>
+                            <li class="nav-item" data-show="connected">
+                                <button class="nav-link" href="/signout-btn">Déconnexion</button>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Contact</a>
@@ -63,6 +69,7 @@
             </div>            
         </footer>
 
+        <script src="js/script.js"></script>    
         <script type="module" src="./router/router.js"></script>
         <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
        
