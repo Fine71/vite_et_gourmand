@@ -23,7 +23,7 @@
 
                          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Accueil</a>
+                                <a class="nav-link" href="/">Accueil</a>                                
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Menu</a>
@@ -42,12 +42,26 @@
         
         <main id="main-page"></main>
         
-        <footer>
-            <p>&copy; 2023 Vite & Gourmand. Tous droits réservés.</p>
+        <footer class="bg-black text-primary text-center footer">
+            <div class="row">
+                <div class="col-6 col-lg-4">
+                    <h3 class="text-secondary">Nos horaires</h3>
+                    <p>Lundi - Vendredi: 09h00 - 18h00</p>
+                    <p>Samedi : 10h00 - 16h00 | Dimanche: Fermé</p>
+                </div>
+                <div class="col-6 col-lg-4">
+                    <h3 class="text-secondary">Contactez-nous</h3>
+                    <p>Email: contact@viteetgourmand.fr</p>
+                </div>
+                <div class="col-6 col-lg-4">
+                    <p><a href="#" class="text-decoration-none text-secondary">Mentions légales | CGV</a></p>
+                    <p class="text-secondary">&copy; 2026 Vite & Gourmand. Tous droits réservés.</p>
+                </div>
+            </div>            
         </footer>
 
-        <script type="module" src="/src/router/route.js"></script>
-        <script src="frontend/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script type="module" src="./router/router.js"></script>
+        <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
        
     </body>
 </html>
