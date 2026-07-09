@@ -61,6 +61,11 @@ const LoadContentPage = async () => {
 
     // Ajout de la balise script au corps du document
     document.querySelector("body").appendChild(scriptTag);
+
+     // Met en surbrillance le lien actif dans la navbar
+    document.querySelectorAll('[data-link]').forEach((link) => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${path}`);
+    });
   }
 
   // Changement du titre de la page
