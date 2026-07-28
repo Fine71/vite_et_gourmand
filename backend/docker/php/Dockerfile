@@ -5,10 +5,7 @@ RUN apk add --no-cache \
         unzip \
         icu-dev \
         libzip-dev \
-<<<<<<< HEAD:backend/Vite_GourmandBackEnd/docker/php/Dockerfile
         libssl-dev \
-=======
->>>>>>> 256b53b30458a18199d77c378650b59b05ed0090:backend/docker/php/Dockerfile
         oniguruma-dev \
         autoconf \
         g++ \
@@ -27,7 +24,6 @@ RUN apk add --no-cache \
     && docker-php-ext-enable mongodb \
     # Nettoyage des outils de compilation (image plus légère)
     && apk del autoconf g++ make pkgconfig
-<<<<<<< HEAD:backend/Vite_GourmandBackEnd/docker/php/Dockerfile
     
 # Dépendances système nécessaires à la compilation de l'extension mongodb
 RUN apt-get update && apt-get install -y \
@@ -40,8 +36,6 @@ RUN apt-get update && apt-get install -y \
 
 # Extensions PHP classiques nécessaires à Symfony/Doctrine (MySQL)
 RUN docker-php-ext-install pdo pdo_mysql
-=======
->>>>>>> 256b53b30458a18199d77c378650b59b05ed0090:backend/docker/php/Dockerfile
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
