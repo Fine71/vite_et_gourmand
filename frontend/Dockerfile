@@ -1,13 +1,8 @@
-FROM bootstrap:latest
+FROM node:20-alpine
 
-RUN apk add --no-cache \
-        openssl \
-        bash \
-        curl \
-        git \
-        unzip \
-    && rm -rf /var/cache/apk/*
-
-COPY nginx.conf /etc/nginx/nginx.conf
-
-WORKDIR /var/www/html
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 3000
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
