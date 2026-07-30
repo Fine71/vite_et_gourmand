@@ -43,7 +43,7 @@ services:
       - mysql
       - mongodb
     networks:
-      - vite_et_gourmand_network
+      - app_net
 
   # =========================================
   # NGINX (Reverse Proxy pour le  Backend)

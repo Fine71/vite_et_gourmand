@@ -2,7 +2,7 @@
 
 // src/Controller/Api/RestaurantController.php
 
-namespace App\Controller\Api;
+namespace App\Controller;
 
 use App\Entity\Restaurant;
 use App\Repository\RestaurantRepository;
