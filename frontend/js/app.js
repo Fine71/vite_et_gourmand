@@ -16,3 +16,24 @@ export async function fetchFromApi(endpoint) {
 
 // Exemple d'utilisation :
 // fetchFromApi('/users').then(data => console.log(data));
+
+fetch(`${API_BASE_URL}/users`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Erreur API: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+
+        data.forEach(user => {
+            const userElement = document.createElement('div');
+            userElement.textContent = `${user.name} (${user.email})`;
+            document.body.appendChild(userElement);
+        });
+    })
+    .catch(error => {
+        console.error(error);
+
+    });  
