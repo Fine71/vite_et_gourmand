@@ -65,6 +65,13 @@ function isConnected() {
     }
 }
 
+//eviter l'injection de code dans le DOM en échappant les caractères spéciaux
+
+function afficherCommentaire(commentaire) {
+    const li = document.createElement('li');
+    li.textContent = commentaire.contenu;
+    listCommentaires.appendChild(li);
+}
 
 /*
 disconnected

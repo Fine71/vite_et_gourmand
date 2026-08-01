@@ -4,9 +4,14 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -14,9 +19,13 @@ class User
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Assert\NotBlank(message: 'L\'email ne peut pas être vide.')]
+    #[Assert\Email(message: 'L\'email "{{ value }}" n\'est pas un email valide.')]
     private ?string $email = null;
     
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min: 8, 
+    minMessage: 'Le mot de passe doit contenir au moins 8 caractères.')]
     private ?string $password = null;
 
     #[ORM\Column(length: 100)]
@@ -28,18 +37,28 @@ class User
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $phone = null;
 
-    #[ORM\Column]
-    private ?array $roles = [null];
+    #[ORM\Column(type: 'json')]
+    private array $roles = [];
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createAt = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $orders = null;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Order::class)]
+    private Collection $orders;
+
+    public function __construct()
+    {
+        $this->orders = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
+    } 
+
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
     }
 
     public function getEmail(): ?string
@@ -53,7 +72,6 @@ class User
 
         return $this;
     }
-
     
     public function getPassword(): ?string
     {
@@ -103,7 +121,7 @@ class User
         return $this;
     }
 
-    public function getRoles(): ?array
+    public function getRoles(): array
     {
         return $this->roles;
     }
@@ -127,15 +145,33 @@ class User
         return $this;
     }
 
-    public function getOrders(): ?string
+    public function getOrders(): Collection
     {
         return $this->orders;
     }
 
-    public function setOrders(string $orders): static
+    public function addOrder(Order $order): static
     {
-        $this->orders = $orders;
-
+        if (!$this->orders->contains($order)) {
+            $this->orders->add($order);
+            $order->setUser($this);
+        }
         return $this;
+    }
+
+    public function removeOrder(Order $order): static
+    {
+        if ($this->orders->removeElement($order)) {
+           if ($order->getUser() === $this) {
+                $order->setUser(null);
+            }
+        }
+        return $this;
+    }
+
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }

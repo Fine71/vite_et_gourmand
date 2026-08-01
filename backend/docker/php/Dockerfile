@@ -5,7 +5,6 @@ RUN apk add --no-cache \
         unzip \
         icu-dev \
         libzip-dev \
-        libssl-dev \
         oniguruma-dev \
         autoconf \
         g++ \

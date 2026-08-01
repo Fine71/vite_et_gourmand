@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\RestaurantRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\Uuid;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RestaurantRepository::class)]
 class Restaurant
@@ -18,7 +18,8 @@ class Restaurant
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    private ?Uuid $UUID = null;
+    #[Assert\Uuid(message: 'L\'UUID n\'est pas valide.')]
+    private ?string $UUID = null;
 
     #[ORM\Column(length: 255)]
     private ?string $address = null;
@@ -61,12 +62,12 @@ class Restaurant
         return $this;
     }
 
-    public function getUUID(): ?Uuid
+    public function getUUID(): ?string
     {
         return $this->UUID;
     }
 
-    public function setUUID(Uuid $UUID): static
+    public function setUUID(string $UUID): static
     {
         $this->UUID = $UUID;
 

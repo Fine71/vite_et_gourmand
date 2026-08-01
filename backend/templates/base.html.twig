@@ -20,5 +20,14 @@
     </head>
     <body>
         {% block body %}{% endblock %}
+
+        {# L'échappement est activé par défaut dans Twig : toute variable #}
+        {# affichée est automatiquement échappée avant l'insertion HTML #}
+        <p>{{ commentaire.contenu }}</p>
+ 
+        {# Le filtre |raw désactive volontairement cet échappement : #}
+        {# à réserver au contenu de confiance, jamais à une saisie utilisateur #}
+
+
     </body>
 </html>
