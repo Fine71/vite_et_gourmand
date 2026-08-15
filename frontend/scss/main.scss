@@ -46,8 +46,9 @@ img {
         position: relative;
     }
 
+    // Mobile first : hauteur réduite par défaut sur petit écran
     .hero-scene-content{
-        height: 200px;
+        height: 160px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -60,18 +61,19 @@ img {
 }
 
 /* 🔹 Sections générales */
-
+/* Mobile first : padding réduit par défaut, agrandi ensuite via les media queries */
 section {
-  padding: 50px;
+  padding: 20px;
   text-align: center;
 }
 
 /* 🔹 Avis */
+/* Mobile first : la carte occupe toute la largeur disponible par défaut */
 .avis-card {
   background: #f5f5f5;
   margin: 20px auto;
   padding: 20px;
-  width: 60%;
+  width: 100%;
   border-radius: 10px;
 }
 
@@ -88,9 +90,10 @@ section {
 }
 
 // page contact
+// Mobile first : le formulaire prend toute la largeur disponible par défaut
 
 .contact-form{
-    max-width: 500px;
+    max-width: 100%;
     margin: 0 auto;
     text-align: left;
 }
@@ -128,4 +131,41 @@ section {
 }
 .contact-section{
     padding: 20px;
+}
+
+// ==========================================================================
+// Approche Mobile First
+// Les styles ci-dessus s'appliquent par défaut aux petits écrans (mobile).
+// Les media queries ci-dessous, en min-width, ajoutent progressivement les
+// adaptations pour les écrans plus larges (tablette puis desktop).
+// ==========================================================================
+
+/* Adaptation tablette : la mise en page s'aère à partir de 768px */
+@media (min-width: 768px) {
+    section {
+        padding: 35px;
+    }
+
+    .avis-card {
+        width: 75%;
+    }
+}
+
+/* Adaptation desktop : plus d'espace disponible à partir de 992px */
+@media (min-width: 992px) {
+    section {
+        padding: 50px;
+    }
+
+    .avis-card {
+        width: 60%;
+    }
+
+    .contact-form {
+        max-width: 500px;
+    }
+
+    .hero-scene .hero-scene-content {
+        height: 200px;
+    }
 }
