@@ -37,6 +37,8 @@ security:
     access_control:
         - { path: ^/api/admin, roles: ROLE_ADMIN }
         - { path: ^/api, roles: ROLE_USER }
+        - { path: ^/api/login, roles: PUBLIC_ACCESS }
+        - { path: ^/api/avis, methods: [GET], roles: PUBLIC_ACCESS }
 
 when@test:
     security:
