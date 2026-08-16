@@ -30,6 +30,16 @@ class AppFixtures extends Fixture
         $user->setCreateAt(new \DateTimeImmutable());
         $manager->persist($user);
 
+        $user2 = new User();
+        $user2->setEmail('ella.johnson@mail.com');
+        $user2->setLastName('Johnson');
+        $user2->setFirstName('Ella');
+        $user2->setRoles(['ROLE_USER']);
+        $user2->setPassword($this->passwordHasher->hashPassword($user2, 'Test2@2408'));
+        $user2->setPhone('0987654321');
+        $user2->setCreateAt(new \DateTimeImmutable());
+        $manager->persist($user2);
+
         $order1 = new Order();
         $order1->setUser($user);
         $order1->setLabel('Commande 1');
